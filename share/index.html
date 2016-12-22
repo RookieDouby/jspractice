@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Js share to blogs</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .content {
+            width: 600px;
+            margin: 50px auto;
+            text-indent:20px;
+            line-height: 1.5;
+            font-size: 16px;
+            font-family: "Microsoft Yahei";
+            border: 2px solid #0066ff;
+            text-shadow: 0px 0px 0px #222;
+        }
+        .share-box {
+            position: absolute;
+            display:none;
+            background-color: lightblue;
+        }
+        .share {
+            position: relative;
+            border:1px solid #ccc;
+            width:100px;
+        }
+        .share:before{
+            content: "";
+            width: 0px;
+            height:0px;
+            border-width:10px;
+            border-style: solid dashed dashed;
+            border-color: transparent #ccc transparent transparent;
+            display: block;
+            position: absolute;
+            left:-20px;
+            bottom:0px;
+        }
+        .share:after {
+            content: "";
+            width: 0px;
+            height:0px;
+            border-width:10px;
+            border-style: solid dashed dashed;
+            border-color: transparent lightblue transparent transparent;
+            display: block;
+            position: absolute;
+            left:-19px;
+            bottom:0px;
+        }
+        .share a {
+            text-decoration: none;
+            font-size:20px;
+            color: #999
+        }
+    </style>
+</head>
+<body>
+    <div class="content" id="content">
+        An evolutionary advantage?
+
+At the root of this paradox is a very basic question regarding the nature of the young child as an inherently credulous being – that is, believing everything he or she is told – versus a rational one.
+
+The noted author and ethologist Richard Dawkins, in a 1995 essay, proposed that children are inherently credulous, and prone to believing in just about anything. He even suggested that it was an evolutionary advantage for children to believe.
+    </div>
+    <div class="share-box">
+        <div class="share" id="share">
+            <em></em>
+            <div class="share-custom">
+                <a href="share to qq"><i class="icon-qq"></i></a>
+                <a href="share to renren"><i class="icon-renren"></i></a>
+                <a href="share to wechat"><i class="icon-wechat"></i></a>
+                <a href="share to facebook"><i class="icon-facebook"></i></a>
+            </div>
+            <span class="share-count">0</span>
+        </div>
+    </div>
+    <script>
+        var content = document.getElementById('content');
+        var share = document.getElementById('share');
+        var shareBox = document.getElementsByClassName('share-box')[0];
+        
+        content.onmouseup = function (e) {
+            var e = e||window.event;
+            var x = e.pageX;
+            var y = e.pageY;
+            var text;
+
+            if(window.getSelection()) {
+                text = window.getSelection().toString();
+            } else {
+                text = document.selection.createRange().text(); //for IE 6,7,8
+            }
+
+            if(text) {
+                showBox(shareBox, x, y);
+            }
+        }
+        
+        document.onclick = function (e) {
+            var content = document.getElementById('content');
+            var e = e || window.event;
+            var targetId = e.target.id;
+
+            if(targetId != "share") {
+                shareBox.style.display = "none";
+            }
+        };
+        
+        function showBox(obj, x, y) {
+            setTimeout(function () {
+                obj.style.display = 'block';
+                obj.style.left = x + 'px';
+                obj.style.top = y  + 'px';
+            },200);
+        }
+    </script>
+</body>
+</html>

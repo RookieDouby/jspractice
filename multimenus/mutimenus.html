@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multistage Menu</title>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+        .suckerdiv ul{
+            list-style-type: none;
+            width: 150px;
+            border-bottom: 1px solid #ccc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .suckerdiv ul li {
+            position: relative;
+        }
+        .suckerdiv ul li ul {
+            position:absolute;
+            left: 149px;
+            top: 0;
+            display: none;
+        }
+        /*link style*/
+        .suckerdiv ul li a {
+            display:block;
+            color: #000 ;
+            text-decoration: none;
+            padding: 5px 5px;
+            border: 1px solid #ccc;
+            border-bottom: 0;
+        }
+        .suckerdiv ul li a:hover {
+            background-color: dimgray;
+            color: #fff;
+            font-size: 16px;
+        }
+        .subfolderstyle {
+            color: #abc !important;
+        }
+    </style>
+    <script>
+        if(window.addEventListener) {
+            window.addEventListener('load', buildSubmenu, false);
+        } else if(widow.attachEvent){
+            window.attachEvent('onload', buildSubmenu)
+        }
+
+        var menuIds = ["suckertree1"];
+
+        function buildSubmenu() {
+            for(var i = 0, len = menuIds.length; i < len; i++) {
+                var ulTags = document.getElementById(menuIds[i]).getElementsByTagName('ul');
+                for(var j = 0, ulLen = ulTags.length; j < ulLen; j ++) {
+                    ulTags[j].parentNode.getElementsByTagName('a')[0].className = "subfolderstyle";
+
+                    ulTags[j].parentNode.onmouseover = function () {
+                        this.getElementsByTagName('ul')[0].style.display = 'block';
+                    };
+                    
+                    ulTags[j].parentNode.onmouseout = function () {
+                        this.getElementsByTagName('ul')[0].style.display = 'none';
+                    };
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="suckerdiv">
+        <ul id="suckertree1">
+            <li><a href="#">Item 1</a></li>
+            <li><a href="#">Item 2</a></li>
+            <li>
+                <a href="#">Folder 1</a>
+                <ul>
+                    <li><a href="#">Sub Item 1.1</a></li>
+                    <li><a href="#">Sub Item 1.2</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Item 3</a></li>
+            <li>
+                <a href="#">Folder 2</a>
+                <ul>
+                    <li><a href="#">Sub Item 2.1</a></li>
+                    <li>
+                        <a href="">Sub Folder 2</a>
+                        <ul>
+                            <li><a href="#">Sub Item 2.1.1</a></li>
+                            <li><a href="#">Sub Item 2.1.2</a></li>
+                            <li><a href="#">Sub Item 2.1.3</a></li>
+                            <li><a href="#">Sub Item 2.1.4</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#">Item 4</a></li>
+        </ul>
+    </div>
+</body>
+</html>

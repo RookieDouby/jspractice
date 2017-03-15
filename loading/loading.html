@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading</title>
+</head>
+<style>
+    .loading {
+        display: table;
+        position: fixed;
+        left:0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 5;
+    }
+    .loading .progress {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+    }
+</style>
+<body>
+    <div class="loading" id="loading">
+        <div class="progress" id="progress">0%</div>
+    </div>
+    <script src="loading.js"></script>
+</body>
+</html>

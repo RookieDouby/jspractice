@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Make a masklayer</title>
+    <style>
+        #login {
+            display: block;
+            text-align:center;
+            width:100px;
+            height: 30px;
+            line-height:30px;
+            padding: 0 10px;
+            background-color: blue;
+            color: #fff;
+            text-decoration: none;
+            margin: 0 auto;
+        }
+        .overlay {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(0,0,0,.3);
+            display: none;
+        }
+        .overlay .popup {
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -150px 0 0 -250px;
+            background: #fff;
+        }
+        .container {
+            position: relative;
+        }
+        .container h1 {
+            text-align: center;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .container .icon-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 30px;
+            color: #4a4a4a;
+            text-decoration: none;
+            -webkit-transition: all 500ms;
+            -moz-transition: all 500ms;
+            -ms-transition: all 500ms;
+            -o-transition: all 500ms;
+            transition: all 500ms;
+        }
+        .container .icon-close:hover {
+            -webkit-transform: rotate(180deg);
+            -moz-transform: rotate(180deg);
+            -ms-transform: rotate(180deg);
+            -o-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+<a href="javascript:;" id="login">Login</a>
+<div class="overlay">
+    <div class="popup">
+        <div class="container">
+            <div class="header">
+                <h1>Welcome to my site!</h1>
+                <a class="icon-close" id="closeBtn" href="javascript:;">X</a>
+            </div>
+            <div class="content">
+                <form action="">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" />
+                    <label for="password">Password</label>
+                    <input type="text" id="password" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    window.onload = function () {
+        var loginBtn = document.getElementById('login');
+        var closeBtn = document.getElementById('closeBtn');
+        var loginPop = document.getElementsByClassName('overlay')[0];
+
+        loginBtn.onclick = function() {
+            showPopup(loginPop);
+        };
+        
+        closeBtn.onclick = function () {
+            closePopup(loginPop);
+        };
+
+        loginPop.onclick = function (e) {
+            var event = e || window.event;
+            console.log(event.currentTarget);// userCapture
+            if(event.target === event.currentTarget) {
+                closePopup(this);
+            }
+        };
+    };
+    
+    function showPopup(loginPop) {
+        loginPop.style.display = "block";
+    }
+    
+    function closePopup(loginPop) {
+        loginPop.style.display = "none";
+    }
+
+
+</script>
+</body>
+</html>

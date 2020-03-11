@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Redux原理</title>
+</head>
+<body>
+    <button onClick="store.dispatch({type: 'minus', num: 2})">-</button>
+    <span id="countDisplay">10</span>
+    <button onClick="store.dispatch({type: 'add', num: 1})">+</button>
+</body>
+<script>
+    const countDisplay = document.querySelector('#countDisplay')
+    const countState = {
+        count: 5
+    };
+
+
+    const changeState = (state, action) => {
+        if (!state) {
+            return countState;
+        }
+        switch(action.type) {
+            case 'minus': 
+                return {
+                    ...state,
+                    count: state.count - action.num
+                }
+                break;
+            case 'add': 
+                return {
+                    ...state,
+                    count: state.count + action.num
+                }
+                break;
+            default: 
+                return state
+                break;
+        }
+    }
+
+    const createStore = (reducer) => {
+        let state = null;
+        const getState = () => state;
+        const listeners = [];
+        const subscribe = (listener) => listeners.push(listener)
+        const dispatch = (action) => {
+            state = reducer(state, action)
+            listeners.forEach(listener => listener())
+        }
+        dispatch({})
+        return {
+            getState,
+            dispatch,
+            subscribe,
+        }
+    }
+
+    const store = createStore(changeState);
+    console.log(store)
+
+    const renderCount = () => {
+        countDisplay.innerHTML = store.getState().count;
+    }
+    
+    renderCount();
+
+    // 调用事件
+    store.subscribe(renderCount);
+</script>
+</html>
